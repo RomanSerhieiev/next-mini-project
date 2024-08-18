@@ -8,3 +8,11 @@
 .dark {
     background-color: rgb(56, 109, 151);
 }
+
+.h1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    flex-grow: 1;
+}

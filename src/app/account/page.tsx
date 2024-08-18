@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 const AccountPage: FC<IProps> = ({searchParams}) => {
     return (
-        <main className={searchParams.light_theme ? css.main : `${css.main} ${css.dark}`}>
+        <main className={searchParams?.light_theme ? css.main : `${css.main} ${css.dark}`}>
             <h1>Account page</h1>
         </main>
     );

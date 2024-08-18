@@ -14,31 +14,31 @@ interface IProps {
 }
 
 const Page: FC<IProps> = async ({searchParams}) => {
-    const themeMovie = searchParams.light_theme ? `?light_theme=${searchParams.light_theme}` : '';
-    if (!searchParams.query) redirect('/movies');
+    const theme = searchParams.light_theme ? `?light_theme=${searchParams.light_theme}` : '';
+    const themeMovie = searchParams.light_theme ? `&light_theme=${searchParams.light_theme}` : '';
+    if (!searchParams.query) redirect(`/movies${theme}`);
     const page =
         searchParams.page
             ? +searchParams.page <= 0
-                ? redirect(`/movies/search?page=1&query=${searchParams.query}`)
+                ? redirect(`/movies/search?page=1&query=${searchParams.query}${themeMovie}`)
                 : +searchParams.page <= 500
                     ? searchParams.page
-                    : redirect(`/movies/search?page=500&query=${searchParams.query}`)
+                    : redirect(`/movies/search?page=500&query=${searchParams.query}${themeMovie}`)
             : '1';
 
     const {results: movies, total_pages} = await movieService.search(page, searchParams.query);
-    if (movies.length === 0) {
-        redirect(`/movies/search?page=${total_pages}&query=${searchParams.query}`);
-    }
 
     const {genres} = await movieService.genres();
 
     return (
-        <div className={searchParams.light_theme ? '' : css.dark}>
-            <div className={css.main}>
-                {movies.map(movie => <MoviesCardComponent key={movie.id} movie={movie} genres={genres} themeMovie={themeMovie} />)}
+        movies.length > 0
+            ? <div className={searchParams.light_theme ? '' : css.dark}>
+                <div className={css.main}>
+                    {movies.map(movie => <MoviesCardComponent key={movie.id} movie={movie} genres={genres} themeMovie={themeMovie} />)}
+                </div>
+                <PaginationComponent page={page} total_pages={total_pages} query={`&query=${searchParams.query}`} />
             </div>
-            <PaginationComponent page={page} total_pages={total_pages} query={`&query=${searchParams.query}`} />
-        </div>
+            : <h1 className={searchParams.light_theme ? css.h1 : `${css.h1} ${css.dark}`}>Nothing found</h1>
     );
 };
 
