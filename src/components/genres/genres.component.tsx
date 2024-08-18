@@ -11,9 +11,10 @@ interface IProps {
     sort_by?: string,
     with_genres?: string,
     without_genres?: string,
+    theme: string
 }
 
-const GenresComponent: FC<IProps> = ({genres, sort_by, with_genres, without_genres}) => {
+const GenresComponent: FC<IProps> = ({genres, sort_by, with_genres, without_genres, theme}) => {
     const router = useRouter();
 
     const withGenreHandler = (genre: string) => {
@@ -37,14 +38,14 @@ const GenresComponent: FC<IProps> = ({genres, sort_by, with_genres, without_genr
 
         if (sort_by) {
             if (without_genres) {
-                router.push(`?page=1${sort_by}${withGenres}${withoutGenres}`);
+                router.push(`?page=1${sort_by}${withGenres}${withoutGenres}${theme}`);
             } else {
-                router.push(`?page=1${sort_by}${withGenres}`);
+                router.push(`?page=1${sort_by}${withGenres}${theme}`);
             }
         } else if (without_genres) {
-            router.push(`?page=1${withGenres}${withoutGenres}`);
+            router.push(`?page=1${withGenres}${withoutGenres}${theme}`);
         } else {
-            router.push(`?page=1${withGenres}`);
+            router.push(`?page=1${withGenres}${theme}`);
         }
     };
 
@@ -69,30 +70,30 @@ const GenresComponent: FC<IProps> = ({genres, sort_by, with_genres, without_genr
 
         if (sort_by) {
             if (with_genres) {
-                router.push(`?page=1${sort_by}${withGenres}${withoutGenres}`);
+                router.push(`?page=1${sort_by}${withGenres}${withoutGenres}${theme}`);
             } else {
-                router.push(`?page=1${sort_by}${withoutGenres}`);
+                router.push(`?page=1${sort_by}${withoutGenres}${theme}`);
             }
         } else if (with_genres) {
-            router.push(`?page=1${withGenres}${withoutGenres}`);
+            router.push(`?page=1${withGenres}${withoutGenres}${theme}`);
         } else {
-            router.push(`?page=1${withoutGenres}`);
+            router.push(`?page=1${withoutGenres}${theme}`);
         }
     };
 
     const withAllGenres = () => {
         if (sort_by) {
-            router.push(`?page=1${sort_by}`);
+            router.push(`?page=1${sort_by}${theme}`);
         } else {
-            router.push(`?page=1`);
+            router.push(`?page=1${theme}`);
         }
     };
 
     const withoutAllGenres = () => {
         if (sort_by) {
-            router.push(`?page=1${sort_by}&without_genres=${genres.map(genre => genre.id).join(',')}`);
+            router.push(`?page=1${sort_by}&without_genres=${genres.map(genre => genre.id).join(',')}${theme}`);
         } else {
-            router.push(`?page=1&without_genres=${genres.map(genre => genre.id).join(',')}`);
+            router.push(`?page=1&without_genres=${genres.map(genre => genre.id).join(',')}${theme}`);
         }
     };
 

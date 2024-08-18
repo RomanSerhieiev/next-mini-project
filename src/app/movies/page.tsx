@@ -78,6 +78,7 @@ const PopularMoviesPage: FC<IProps> = async ({searchParams}) => {
                     sort_by={sort_by}
                     with_genres={searchParams.with_genres}
                     without_genres={searchParams.without_genres}
+                    theme={theme}
                 />
             </div>
             <div className={css.main}>
