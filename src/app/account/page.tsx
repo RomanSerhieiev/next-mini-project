@@ -9,16 +9,16 @@ interface IProps {
 }
 
 export const metadata: Metadata = {
-    title: 'The Movie Database (TMDB)',
+    title: 'User account - The Movie Database (TMDB)',
     description: 'The Movie Database (TMDB) is a popular, user editable database for movies and TV shows.',
 };
 
-const HomePage: FC<IProps> = ({searchParams}) => {
+const AccountPage: FC<IProps> = ({searchParams}) => {
     return (
         <main className={searchParams.light_theme ? css.main : `${css.main} ${css.dark}`}>
-            <h1>Home page</h1>
+            <h1>Account page</h1>
         </main>
     );
 };
 
-export default HomePage;
+export default AccountPage;

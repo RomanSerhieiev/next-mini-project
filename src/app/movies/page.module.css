@@ -1,0 +1,17 @@
+.main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+.filters {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 20px;
+}
+
+.dark {
+    background-color: rgb(56, 109, 151);
+}
