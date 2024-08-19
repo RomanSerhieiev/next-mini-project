@@ -101,7 +101,7 @@ const GenresComponent: FC<IProps> = ({genres, sort_by, with_genres, without_genr
         <div className={css.main}>
             <div className={css.genres}>
                 <button onClick={withAllGenres}>All genres</button>
-                <div>
+                <div className={css.container}>
                     {genres.map(genre =>
                         <Badge onClick={() => withGenreHandler(genre.id.toString())} key={genre.id} color={
                             with_genres
@@ -121,7 +121,7 @@ const GenresComponent: FC<IProps> = ({genres, sort_by, with_genres, without_genr
             </div>
             <div className={css.genres}>
                 <button onClick={withoutAllGenres}>Without genres</button>
-                <div>
+                <div className={css.container}>
                     {genres.map(genre =>
                         <Badge onClick={() => withoutGenreHandler(genre.id.toString())} key={genre.id} color={
                             without_genres ? without_genres.split(',').find(id => +id === genre.id) ? 'danger' : 'secondary' : 'secondary'
